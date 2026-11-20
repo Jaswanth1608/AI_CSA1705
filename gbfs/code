@@ -1,0 +1,45 @@
+import heapq
+
+# Greedy Best-First Search
+def gbfs(graph, heuristic, start, goal):
+    pq = [(heuristic[start], start, [start])]
+    visited = set()
+
+    while pq:
+        h, node, path = heapq.heappop(pq)
+
+        if node in visited:
+            continue
+
+        visited.add(node)
+
+        if node == goal:
+            return path
+
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                heapq.heappush(
+                    pq,
+                    (heuristic[neighbor], neighbor,
+                     path + [neighbor])
+                )
+
+    return None
+
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['G'],
+    'F': ['G'],
+    'G': []
+}
+
+heuristic = {
+    'A': 6, 'B': 4, 'C': 2,
+    'D': 5, 'E': 3, 'F': 1, 'G': 0
+}
+
+print("Path:", gbfs(graph, heuristic, 'A', 'G'))
