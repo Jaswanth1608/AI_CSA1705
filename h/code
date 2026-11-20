@@ -1,0 +1,18 @@
+# Heuristic Search Example
+
+def heuristic(node, goal):
+    h = {
+        'A': 5,
+        'B': 4,
+        'C': 2,
+        'D': 1,
+        'G': 0
+    }
+    return h[node]
+
+
+nodes = ['A', 'B', 'C', 'D', 'G']
+goal = 'G'
+
+for node in nodes:
+    print("Heuristic of", node, "=", heuristic(node, goal))
